@@ -1,5 +1,5 @@
-# MSc_thesis
-My Master of Sciences thesis.
+
+# My Master of Sciences thesis 🎓
 
 
 # Abstract
