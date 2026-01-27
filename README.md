@@ -29,6 +29,8 @@
 
 ## Workflow ⚡
 
+![Workflow](Screenshots/workflow.png)
+
 ## Instructions
 'Module_all_functions.py' contains all the functions that have been used in the whole project thesis.
 
