@@ -31,53 +31,61 @@
 
 ```mermaid
 graph TD
-    %% Input
-    SAT[Satellite Altimetry Data]
-    INS[In-Situ Mooring Data]
+    %% Font e nodi stilizzati tramite sintassi nativa
+    SAT["<b>🛰️ SATELLITE ALTIMETRY</b><br/><i>Remote Sensing Dataset</i>"]
+    INS["<b>⚓ MOORING DATA</b><br/><i>In-Situ Observations</i>"]
 
-    %% Flusso Satellite (Spazio)
-    subgraph ST [ ]
+    %% Fase 1
+    subgraph " "
         direction TB
-        L1[<b>1a. Spatial Co-location</b>]
-        SAT --> R[Radii: 30, 50, 70 km]
-        R --> S_MET[Methods: Minimum Distance, IDW]
-    end
+        L1["<div style='font-size:16px'><b>PHASE 1: SPATIO-TEMPORAL ALIGNMENT</b></div>"]
+        
+        subgraph "1a. Spatial Matching"
+            direction TB
+            SAT --> R{"Cross Radii"}
+            R --> R_OPT["• 30 km<br/>• 50 km<br/>• 70 km"]
+            R_OPT --> S_MET["<b>Spatial Methods</b><br/>• Minimum Distance<br/>• IDW Interpolation"]
+        end
 
-    %% Flusso Mooring (Tempo)
-    subgraph TT [ ]
-        direction TB
-        L2[<b>1b. Temporal Co-location</b>]
-        INS --> W[Windows: 15, 30, 60 min]
-        W --> T_MET[Methods: Closest Obs., Mean Value]
+        subgraph "1b. Temporal Matching"
+            direction TB
+            INS --> W{"Time Window"}
+            W --> W_OPT["• 15 min<br/>• 30 min<br/>• 60 min"]
+            W_OPT --> T_MET["<b>Temporal Methods</b><br/>• Closest Observation<br/>• Mean Value Analysis"]
+        end
     end
 
     %% Punto di Sincronizzazione
-    S_MET --> SYNC([Spatio-Temporal Synchronization])
+    S_MET --> SYNC([<b>⚡ SPATIO-TEMPORAL MATCH-UP</b>])
     T_MET --> SYNC
 
-    %% Processing
-    subgraph CP [ ]
+    %% Fase 2
+    subgraph " "
         direction TB
-        L3[<b>2. Calibration </b>]
-        SYNC --> BC{Bias Correction Techniques}
-        BC --> BC1[Full Distribution Mapping]
-        BC --> BC2[Quantile Mapping]
-        BC --> BC3[Linear Regression]
-        BC --> BC4[Delta Technique]
+        L3["<div style='font-size:16px'><b>PHASE 2: CALIBRATION & BIAS CORRECTION</b></div>"]
+        
+        SYNC --> BC{"Correction techniques"}
+        
+        BC --> BC1["<b>Full Dist. Mapping</b><br/>"]
+        BC --> BC2["<b>Quantile Mapping</b><br/>"]
+        BC --> BC3["<b>Linear Regression</b><br/>"]
+        BC --> BC4["<b>Delta Technique</b><br/>"]
     end
 
-    %% Output e Validazione
-    BC1 & BC2 & BC3 & BC4 --> SAVE[(Storage of all scenarios)]
+    %% Fase 3
+    BC1 & BC2 & BC3 & BC4 --> SAVE[(<b>SCENARIO REPOSITORY</b><br/><i>All Processed Cases</i>)]
     
-    SAVE --> COMP{Comparison Analysis}
+    SAVE --> COMP{<b>PERFORMANCE ANALYSIS</b><br/>Statistical Benchmarking}
 
-    subgraph VR [ ]
+    subgraph " "
         direction TB
-        L4[<b>3. Validation & Performance</b>]
-        COMP --> METRICS["Statistical Parameters<br/>(RMSE, BIAS, CC, SI)"]
+        L4["<div style='font-size:16px'><b>PHASE 3: VALIDATION</b></div>"]
+        
+        COMP --> METRICS["<b>Accuracy Metrics</b><br/>RMSE • BIAS • CC • SI"]
     end
 
-    METRICS --> FINAL[/Identification of the most accurate configuration/]
+    %% Output Finale
+    METRICS --> FINAL{{"<b>🏆 OPTIMAL CONFIGURATION</b><br/>Most Accurate Methodology Identification"}}
 ```
 
 ## Repository Structure 📂
